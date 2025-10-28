@@ -3,6 +3,7 @@ const express = require('express');
 const { toNodeHandler } = require('better-auth/node');
 const auth = require('./lib/auth');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Rotas BetterAuth
 app.use('/api/auth', toNodeHandler(auth));
@@ -31,6 +33,9 @@ app.get('/', (req, res) => {
         status: 'Running',
     });
 });
+
+const favoritesRoutes = require('./routes/favorites');
+app.use('/api/favorites', favoritesRoutes);
 
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
