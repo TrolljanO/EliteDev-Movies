@@ -6,6 +6,6 @@ const environment = process.env.NODE_ENV || 'development';
 const config = knexConfig[environment];
 
 // Cria instância de conexão
-const db = knex(config);
+const database = knex(config);
 
-module.exports = db;
+module.exports = database;
