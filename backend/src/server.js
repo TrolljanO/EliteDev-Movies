@@ -25,7 +25,7 @@ app.use(cookieParser());
 // Rotas BetterAuth
 app.use('/api/auth', toNodeHandler(auth));
 
-// Rota de teste
+// Rota de teste '/'
 app.get('/', (req, res) => {
     res.json({
         message: '🎬 Movies Library API',
@@ -34,8 +34,14 @@ app.get('/', (req, res) => {
     });
 });
 
+
+// Rotas Favoritos
 const favoritesRoutes = require('./routes/favorites');
 app.use('/api/favorites', favoritesRoutes);
+
+// Rotas TMDB
+const tmdbRoutes = require('./routes/tmdb');
+app.use('/api/tmdb', tmdbRoutes);
 
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
