@@ -9,7 +9,7 @@ if (!TMDB_BEARER) {
     console.warn('[TMDb] TMDB_BEARER ausente.')
 }
 
-async function tbdbFetch(pathWithQuery) {
+async function tmdbFetch(pathWithQuery) {
     const url = `${TMDB_API_BASE}${pathWithQuery}`;
     const res = await fetch(url, {
         headers: {
@@ -29,12 +29,12 @@ async function tbdbFetch(pathWithQuery) {
 router.get('/popular', async (req, res) => {
     try {
       const page = Number(req.query.page || 1)
-      const data = await tbdbFetch(`/movie/popular?page=${page}`)
+      const data = await tmdbFetch(`/movie/popular?page=${page}`)
         res.set('Cache-Control', 'public, max-age=120')
         res.json(data)
     } catch (error) {
         res.status(error.status || 500).json({
-            error: 'TMDB_SEARCH_FAILED',
+            error: 'TMDB_POPULAR_FAILED',
             message: error.message,
         })
     }
@@ -43,12 +43,27 @@ router.get('/popular', async (req, res) => {
 router.get('/movie/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const data = await tbdbFetch(`/movie/${id}`)
+        const data = await tmdbFetch(`/movie/${id}`)
         res.set('Cache-Control', 'public, max-age=300')
         res.json(data)
     } catch (error) {
         res.status(error.status || 500).json({
             error: 'TMDB_DETAILS_FAILED',
+            message: error.message,
+        })
+    }
+})
+
+router.get('/search', async (req, res) => {
+    try {
+        const q = req.query.q || ''
+        const page = Number(req.query.page || 1)
+        const data = await tmdbFetch(`/search/movie?query=${encodeURIComponent(q)}&page=${page}`)
+        res.set('Cache-Control', 'public, max-age=120')
+        res.json(data)
+    } catch (error) {
+        res.status(error.status || 500).json({
+            error: 'TMDB_SEARCH_FAILED',
             message: error.message,
         })
     }
