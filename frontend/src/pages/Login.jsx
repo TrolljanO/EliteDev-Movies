@@ -17,9 +17,7 @@ export default function Login() {
         setError(null)
         setSubmitting(true)
         try {
-            // efetua login (backend seta o cookie)
             await AuthService.signin({ email, password })
-            // em seguida busca a sessão para popular o contexto
             const { data } = await AuthService.session()
             setUser(data?.user ?? null)
             navigate('/')
