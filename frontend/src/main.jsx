@@ -8,6 +8,8 @@ import Register from './pages/Register'
 import FavoritesPage from './pages/Favorites'
 import MovieDetails from './pages/MovieDetails'
 import Private from './routes/Private'
+import NotFound from './pages/NotFound'
+import './index.css'
 
 createRoot(document.getElementById('root')).render(
     <AuthProvider>
@@ -25,6 +27,7 @@ createRoot(document.getElementById('root')).render(
                 />
                 <Route path="/movie/:id" element={<MovieDetails />} />
                 <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     </AuthProvider>
