@@ -17,7 +17,13 @@ export default function FavoritesPage() {
         Favorites.list()
             .then(({ data }) => {
                 if (!active) return
-                setItems(data ?? [])
+                const raw = Array.isArray(data?.data) ? data.data : (Array.isArray(data) ? data : [])
+                const arr = raw.map((f) => ({
+                    movieId: String(f.movieId ?? f.movie_id),
+                    title: f.title ?? f.movieTitle ?? f.movie_title,
+                    posterPath: f.posterPath ?? f.moviePosterPath ?? f.movie_poster_path,
+                }))
+                setItems(arr)
             })
         .catch((err) => {
             if (!active) return
@@ -36,7 +42,13 @@ export default function FavoritesPage() {
             await Favorites.remove(movieId)
         } catch {
             const { data } = await Favorites.list()
-            setItems(data ?? [])
+            const raw = Array.isArray(data?.data) ? data.data : (Array.isArray(data) ? data : [])
+            const arr = raw.map((f) => ({
+                movieId: String(f.movieId ?? f.movie_id),
+                title: f.title ?? f.movieTitle ?? f.movie_title,
+                posterPath: f.posterPath ?? f.moviePosterPath ?? f.movie_poster_path,
+            }))
+            setItems(arr)
         }
     }
 

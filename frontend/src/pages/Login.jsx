@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AuthService } from '../services/auth'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -11,6 +11,7 @@ export default function Login() {
 
     const { setUser } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -20,7 +21,8 @@ export default function Login() {
             await AuthService.signin({ email, password })
             const { data } = await AuthService.session()
             setUser(data?.user ?? null)
-            navigate('/')
+            const from = location?.state?.from?.pathname || '/'
+            navigate(from, { replace: true })
         } catch (err) {
             console.error('Login failed:', err?.response?.data || err)
             setError('Falha no login. Verifique as credenciais.')

@@ -45,7 +45,8 @@ export default function Home() {
         Favorites.list()
             .then(({ data }) => {
                 if (!active) return
-                const set = new Set((data ?? []).map((f) => String(f.movieId)))
+                const arr = Array.isArray(data?.data) ? data.data : (Array.isArray(data) ? data : [])
+                const set = new Set(arr.map((f) => String(f.movieId ?? f.movie_id)))
                 setFavoritesSet(set)
             })
         .catch((err) => {})
