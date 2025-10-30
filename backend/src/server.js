@@ -14,7 +14,7 @@ app.set('trust proxy', true);
 app.use(cors({
     origin: [
         process.env.BETTER_AUTH_URL || 'http://localhost:3001',
-        'http://localhost:5173',
+        'http://localhost:5173', 'https://elite-dev-movies.vercel.app'
     ],
     credentials: true,
 }));
