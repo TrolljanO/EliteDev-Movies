@@ -1,3 +1,4 @@
+
 // scripts/tmdb_smoke.mjs
 const base = process.env.API_BASE_URL || 'http://localhost:3001'
 

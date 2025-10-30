@@ -17,7 +17,7 @@ const email = `user_${Date.now()}@test.local`
 const password = 'Pass123!'
 
 // Signup (ignorar erro se já existir)
-let res = await fetch(base + '/api/auth/signup', {
+let res = await fetch(base + '/api/auth/sign-up/email', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email, password })
@@ -25,7 +25,7 @@ let res = await fetch(base + '/api/auth/signup', {
 console.log('signup status:', res.status)
 
 // Signin
-res = await fetch(base + '/api/auth/signin', {
+res = await fetch(base + '/api/auth/sign-in/email', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email, password })
@@ -36,7 +36,7 @@ cookie = mergeSetCookie(res.headers)
 console.log('cookie capturado:', cookie)
 
 // Session
-res = await fetch(base + '/api/auth/session', { headers: { Cookie: cookie } })
+res = await fetch(base + '/api/auth/get-session', { headers: { Cookie: cookie } })
 console.log('session status:', res.status)
 const session = await res.json()
 console.log('session body:', session)
