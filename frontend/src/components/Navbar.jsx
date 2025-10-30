@@ -8,7 +8,7 @@ export default function Navbar() {
 
     const handleSignOut = async () => {
         try {
-            await AuthService.signOut()
+            await AuthService.signout()
             setUser(null)
             navigate('/login')
         } catch (error) {
@@ -31,7 +31,7 @@ export default function Navbar() {
                 {user ? (
                     <div className="flex items-center gap-2">
                         <span className="text-sm opacity-80">{user.email}</span>
-                        <button onClick={handleSignout} className="text-sm text-red-300 hover:text-red-200">
+                        <button onClick={handleSignOut} className="text-sm text-red-300 hover:text-red-200">
                             Sair
                         </button>
                     </div>
