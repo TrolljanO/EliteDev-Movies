@@ -25,9 +25,27 @@ exports.getFavorites = async (req, res) => {
 exports.addFavorite = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { movieId, movieTitle, moviePosterPath, movieOverview, movieReleaseDate } = req.body;
+        const {
+            movieId,
+            movieTitle,
+            moviePosterPath,
+            movieOverview,
+            movieReleaseDate,
+            // fallbacks from UI payloads
+            title,
+            posterPath,
+            overview,
+            releaseDate,
+            release_date,
+            poster_path,
+        } = req.body;
 
-        if (!movieId || !movieTitle) {
+        const finalTitle = movieTitle ?? title;
+        const finalPosterPath = moviePosterPath ?? posterPath ?? poster_path ?? null;
+        const finalOverview = movieOverview ?? overview ?? null;
+        const finalReleaseDate = movieReleaseDate ?? releaseDate ?? release_date ?? null;
+
+        if (!movieId || !finalTitle) {
             return res.status(400).json({
                 success: false,
                 message: 'movieId e movieTitle são obrigatórios'
@@ -36,10 +54,11 @@ exports.addFavorite = async (req, res) => {
 
         const existing = await db('favorites')
             .where('user_id', userId)
+            .andWhere('movie_id', movieId)
             .first();
 
         if (existing) {
-            return res.status.json({
+            return res.status(409).json({
                 success: false,
                 message: 'Filme já foi favoritado'
             });
@@ -49,12 +68,12 @@ exports.addFavorite = async (req, res) => {
             .insert({
                 user_id: userId,
                 movie_id: movieId,
-                movie_title: movieTitle,
-                movie_poster_path: moviePosterPath,
-                movie_overview: movieOverview,
-                movie_release_date: movieReleaseDate
+                movie_title: finalTitle,
+                movie_poster_path: finalPosterPath,
+                movie_overview: finalOverview,
+                movie_release_date: finalReleaseDate,
             })
-        .returning('*');
+            .returning('*');
 
         res.status(201).json({
             success: true,

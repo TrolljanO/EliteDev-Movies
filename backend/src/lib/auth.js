@@ -20,7 +20,7 @@ const auth = betterAuth({
     baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3001",
     trustedOrigins: [
         "http://localhost:3001",
-        'http://localhost:5173'
+        "http://localhost:5173",
     ],
     session: {
         expiresIn: 60 * 60 * 24 * 7,
