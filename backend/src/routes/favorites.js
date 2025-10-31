@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import favoritesController from '../controllers/favoritesController.js';
+import { requireAuth } from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
-const favoritesController = require('../controllers/favoritesController');
-const { requireAuth } = require('../middlewares/authMiddleware');
 
 router.use(requireAuth);
 
@@ -13,4 +14,4 @@ router.delete('/:movieId', favoritesController.removeFavorite);
 
 router.get('/check/:movieId', favoritesController.checkFavorite);
 
-module.exports = router;
+export default router;

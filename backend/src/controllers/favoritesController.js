@@ -1,6 +1,6 @@
-const db = require('../config/database');
+import db from '../config/database.js';
 
-exports.getFavorites = async (req, res) => {
+const getFavorites = async (req, res) => {
     try {
         const userId = req.user.id;
 
@@ -22,7 +22,7 @@ exports.getFavorites = async (req, res) => {
     }
 };
 
-exports.addFavorite = async (req, res) => {
+const addFavorite = async (req, res) => {
     try {
         const userId = req.user.id;
         const {
@@ -89,7 +89,7 @@ exports.addFavorite = async (req, res) => {
     }
 };
 
-exports.removeFavorite = async (req, res) => {
+const removeFavorite = async (req, res) => {
     try {
         const userId = req.user.id;
         const { movieId } = req.params;
@@ -118,7 +118,7 @@ exports.removeFavorite = async (req, res) => {
     }
 };
 
-exports.checkFavorite = async (req, res) => {
+const checkFavorite = async (req, res) => {
     try {
         const userId = req.user.id;
         const { movieId } = req.params;
@@ -140,3 +140,5 @@ exports.checkFavorite = async (req, res) => {
         });
     }
 };
+
+export default { getFavorites, addFavorite, removeFavorite, checkFavorite };

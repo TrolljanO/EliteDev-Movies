@@ -1,7 +1,7 @@
-require('dotenv').config();
-
-const { Kysely, PostgresDialect } = require('kysely');
-const { Pool } = require('pg');
+import dotenv from 'dotenv';
+dotenv.config();
+import { Kysely, PostgresDialect } from 'kysely';
+import { Pool } from 'pg';
 
 const db = new Kysely({
     dialect: new PostgresDialect({
@@ -15,4 +15,4 @@ const db = new Kysely({
     })
 });
 
-module.exports = db;
+export default db;

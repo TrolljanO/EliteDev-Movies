@@ -1,5 +1,5 @@
-const auth = require('../lib/auth');
-const db = require('../lib/db');
+import auth from '../lib/auth.js';
+import db from '../lib/db.js';
 
 const requireAuth = async (req, res, next) => {
     try {
@@ -64,4 +64,4 @@ const requireAuth = async (req, res, next) => {
     }
 };
 
-module.exports = { requireAuth };
+export { requireAuth };

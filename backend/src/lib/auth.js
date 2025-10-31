@@ -1,8 +1,8 @@
-require('dotenv').config();
-const { betterAuth } = require("better-auth");
-const { Pool } = require('pg');
+import dotenv from 'dotenv';
+import { betterAuth } from 'better-auth';
+import { Pool } from 'pg';
 
-console.log('🔍 Inicializando BetterAuth...');
+dotenv.config();
 
 const pool = new Pool({
     host: process.env.DB_HOST,
@@ -32,4 +32,4 @@ const auth = betterAuth({
     },
 });
 
-module.exports = auth;
+export default auth;
