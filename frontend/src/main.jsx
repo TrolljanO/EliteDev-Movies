@@ -26,7 +26,6 @@ createRoot(document.getElementById('root')).render(
                 }
                 />
                 <Route path="/movie/:id" element={<MovieDetails />} />
-                <Route path="*" element={<Navigate to="/" />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>

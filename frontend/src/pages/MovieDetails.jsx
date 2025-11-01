@@ -35,7 +35,7 @@ export default function MovieDetails() {
         return () => {
             active = false
         }
-    }, [])
+    }, [id])
 
     useEffect(() => {
         let active = true
