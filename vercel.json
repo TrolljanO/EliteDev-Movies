@@ -9,7 +9,7 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist",
+        "distDir": "frontend/dist",
         "buildCommand": "npm run build"
       }
     }
@@ -20,20 +20,11 @@
       "dest": "backend/src/server.js"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/assets/$1"
-    },
-    {
-      "src": "^/favicon.ico",
-      "dest": "/dist/favicon.ico"
-    },
-    {
-      "src": "^/LogoVerzelHorizontal.svg",
-      "dest": "/dist/LogoVerzelHorizontal.svg"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/index.html"
+      "dest": "frontend/dist/index.html"
     }
   ]
 }
