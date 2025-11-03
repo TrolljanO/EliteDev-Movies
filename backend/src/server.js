@@ -25,6 +25,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  console.log(`[INCOMING REQUEST] Method: ${req.method}, Path: ${req.path}`);
+  next();
+});
+
 app.use('/api/auth', toNodeHandler(auth));
 
 app.get('/', (req, res) => {
