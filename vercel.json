@@ -9,6 +9,8 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
+        "includeFiles": "frontend/**",
+        "rootDir": "frontend/",
         "distDir": "dist"
       }
     }
@@ -22,5 +24,10 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "backend/src/server.js": {
+      "includeFiles": "backend/**"
+    }
+  }
 }
