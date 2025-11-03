@@ -23,7 +23,7 @@
     },
     {
       "source": "/assets/(.*)",
-      "destination": "/dist/assets/(.*)"
+      "destination": "/dist/assets/$1"
     }
   ]
 }
