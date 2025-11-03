@@ -18,12 +18,11 @@
   ],
   "routes": [
     {
-      "src": "/api/:path*",
+      "src": "/api/(.*)",
       "dest": "backend/src/server.js"
     },
     {
-      "src": "/api/tmdb/:path*",
-      "dest": "backend/src/server.js"
+      "src": "/tmdb/movie/:id"
     },
     {
       "src": "/(.*)",
