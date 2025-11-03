@@ -23,7 +23,7 @@
     },
     {
       "source": "/assets/(.*)",
-      "destination": "/dist/assets/$1"
+      "destination": "/dist/assets/index.js"
     }
   ]
 }
