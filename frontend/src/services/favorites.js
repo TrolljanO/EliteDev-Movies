@@ -2,7 +2,7 @@ import { api } from './http'
 
 export const Favorites = {
   list() {
-    return api.get('/api/favorites')
+    return api.get('/favorites')
   },
   add(movie) {
     const payload = {
@@ -12,12 +12,12 @@ export const Favorites = {
       movieOverview: movie.movieOverview ?? movie.overview ?? null,
       movieReleaseDate: movie.movieReleaseDate ?? movie.releaseDate ?? movie.release_date ?? null,
     }
-    return api.post('/api/favorites', payload)
+    return api.post('/favorites', payload)
   },
   check(movieId) {
-    return api.get(`/api/favorites/check/${movieId}`)
+    return api.get(`/favorites/check/${movieId}`)
   },
   remove(movieId) {
-    return api.delete(`/api/favorites/${movieId}`)
+    return api.delete(`/favorites/${movieId}`)
   },
 }
