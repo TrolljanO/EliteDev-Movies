@@ -3,14 +3,15 @@
   "builds": [
     {
       "src": "backend/src/server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": "backend/**"
+      }
     },
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "includeFiles": "frontend/**",
-        "rootDir": "frontend/",
         "distDir": "dist"
       }
     }
@@ -21,13 +22,16 @@
       "destination": "/backend/src/server.js"
     },
     {
+      "source": "/",
+      "destination": "/frontend/dist/index.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/frontend/dist/assets/$1"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/frontend/dist/$1"
     }
-  ],
-  "functions": {
-    "backend/src/server.js": {
-      "includeFiles": "backend/**"
-    }
-  }
+  ]
 }
