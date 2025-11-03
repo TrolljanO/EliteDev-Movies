@@ -22,9 +22,6 @@
       "dest": "backend/src/server.js"
     },
     {
-      "src": "/tmdb/movie/:id"
-    },
-    {
       "src": "/(.*)",
       "dest": "frontend/$1"
     }
