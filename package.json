@@ -1,6 +1,3 @@
 {
-  "name": "elitedev-movies-fullstack",
-  "scripts": {
-    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install"
-  }
+  "name": "elitedev-movies-fullstack"
 }
