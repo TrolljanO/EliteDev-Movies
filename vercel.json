@@ -18,7 +18,11 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/api/:path*",
+      "dest": "backend/src/server.js"
+    },
+    {
+      "src": "/api/tmdb/:path*",
       "dest": "backend/src/server.js"
     },
     {
