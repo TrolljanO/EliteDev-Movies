@@ -18,18 +18,18 @@ const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
     },
-    baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3001",
+    baseURL: process.env.BETTER_AUTH_URL || "https://elite-dev-movies.vercel.app",
     trustedOrigins: [
-        "http://localhost:3001",
-        "http://localhost:5173",
+        "https://elite-dev-movies.vercel.app",
+        "https://elite-dev-movies-gkrwr5m47-trolljano.vercel.app",
     ],
     session: {
         expiresIn: 60 * 60 * 24 * 7,
         updateAge: 60 * 60 * 24,
     },
     advanced: {
-        useSecureCookies: false,
-        crossSubDomainCookies: false,
+        useSecureCookies: process.env.NODE_ENV !== 'production' ? false : {rejectUnauthorized: true},
+        crossSubDomainCookies: process.env.NODE_ENV !== 'production' ? false : {rejectUnauthorized: true},
     },
 });
 
