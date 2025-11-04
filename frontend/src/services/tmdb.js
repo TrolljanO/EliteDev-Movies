@@ -5,7 +5,7 @@ export const TMDb = {
     return api.get(`/tmdb/popular`, { params: { page } })
   },
   details(id) {
-    return api.get(`/tmdb/movie/${id}`)
+    return api.get(`/tmdb/movie`, { params: { id } })
   },
   search(q, page = 1) {
       return api.get('/tmdb/search', { params: { q, page } })
