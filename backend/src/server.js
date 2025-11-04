@@ -43,8 +43,12 @@ app.get('/', (req, res) => {
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/tmdb', tmdbRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV}`);
-    console.log(`Auth URL (origin): ${process.env.BETTER_AUTH_URL}`);
-});
+export default (req, res) => app(req, res);
+
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        console.log(`Environment: ${process.env.NODE_ENV}`);
+        console.log(`Auth URL (origin): ${process.env.BETTER_AUTH_URL}`);
+    });
+}
